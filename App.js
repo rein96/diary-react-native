@@ -1,61 +1,59 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableNativeFeedback, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text } from 'react-native'
+import { Icon } from 'native-base'  // support ionicons.com
+import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
 
-const styles = StyleSheet.create({
-  container:{
-    flexDirection:'row',   // 'column' as default
-    alignItems: 'flex-start',
-    justifyContent: 'space-around',
-    backgroundColor: 'grey',
-    flex: 1
-  },
-  button: {
-    width: 50,
-    marginHorizontal: 5, 
-    marginVertical: 5,  // 5 -> 5px
-    height: 50,
-    backgroundColor: '#d9534f'
-  },
-  text: {
-    margin: 2,
-    // fontSize: 30,
-    color: 'white',
-    textAlign: 'center'
-  }
+import AuthScreen from './src/auth/AuthScreen'
+import DiaryScreen from './src/app/DiaryScreen'
+import ProfileScreen from './src/app/ProfileScreen'
+
+// createBottomTabNavigator(RouteConfigs, BottomTabNavigatorConfig);
+const MainTab = createBottomTabNavigator(
+    // RouteConfigs
+    {
+        // 'Nama' Tab nya
+        Diary: {
+            screen: DiaryScreen,
+            navigationOptions: {
+                tabBarIcon: <Icon name='bookmarks' />   //<ion-icon name="bookmarks"></ion-icon>
+            }
+        },
+        Profile: {
+            screen: ProfileScreen,
+            navigationOptions: {
+                tabBarIcon: <Icon name="contact" /> // <ion-icon name="contact"></ion-icon>
+            }
+        }
+
+    },
+    // BottomTabNavigatorConfig
+    {
+        tabBarOptions: {
+            activeTintColor: 'purple',
+            inactiveTintColor : 'grey'
+        }
+    }
+)
+
+const RootStack = createStackNavigator({
+    // properties order by first stack
+    Auth: AuthScreen,
+    Kesini: DiaryScreen,
+    Main: MainTab
+}, {
+    // Remove the grey header for all screens
+    headerMode: 'none'
 })
+
+
+const AppContainer = createAppContainer(RootStack)
+
 
 class App extends Component {
   
   render() {
     return (
-      <View style={styles.container} >
-        
-        <TouchableNativeFeedback>
-          <View style={ styles.button }>
-            <Text style={ styles.text }>A</Text>
-          </View>
-        </TouchableNativeFeedback>
-
-        <TouchableNativeFeedback>
-          <View style={ styles.button }>
-            <Text style={ styles.text }>B</Text>
-          </View>
-        </TouchableNativeFeedback>
-
-        <TouchableOpacity>
-          <View style={ styles.button } >
-            <Text style={ styles.text } >C</Text>
-          </View>
-        </TouchableOpacity>
-
-        {/* <TouchableOpacity>
-          <View style={ { width: 150, height: 100, backgroundColor: 'blue' } } >
-            <Text style={{ margin:30, color:'white' }} >D</Text>
-          </View>
-        </TouchableOpacity> */}
-
-
-      </View>
+        <AppContainer  />
     )
   }
 }
