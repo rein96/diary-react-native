@@ -1,11 +1,33 @@
 import React, { Component } from 'react'
+import { Provider } from 'react-redux'
 import { View, Text } from 'react-native'
 import { Icon } from 'native-base'  // support ionicons.com
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
 
 import AuthScreen from './src/auth/AuthScreen'
+
 import DiaryScreen from './src/app/DiaryScreen'
+import AddDiaryScreen from './src/app/AddDiaryScreen'
+import DetailDiaryScreen from './src/app/DetailDiaryScreen'
+
 import ProfileScreen from './src/app/ProfileScreen'
+
+import STORE from './src/store/reducers/index'
+
+/* 
+    ini props.navigation (DiaryScreen.js) bisa dipake karena di App.js const DiaryStack = creteStackNavigator({})
+    this.props.navigation.navigate('AddDiary')
+*/
+const DiaryStack = createStackNavigator(
+    {
+      ListDiary: DiaryScreen,
+      AddDiary: AddDiaryScreen,
+      DetailDiary: DetailDiaryScreen
+    },
+    {
+      headerMode: 'none'
+    }
+);
 
 // createBottomTabNavigator(RouteConfigs, BottomTabNavigatorConfig);
 const MainTab = createBottomTabNavigator(
@@ -13,7 +35,7 @@ const MainTab = createBottomTabNavigator(
     {
         // 'Nama' Tab nya
         Diary: {
-            screen: DiaryScreen,
+            screen: DiaryStack,     // 3 stack screen
             navigationOptions: {
                 tabBarIcon: <Icon name='bookmarks' />   //<ion-icon name="bookmarks"></ion-icon>
             }
@@ -33,7 +55,8 @@ const MainTab = createBottomTabNavigator(
             inactiveTintColor : 'grey'
         }
     }
-)
+);
+
 
 const RootStack = createStackNavigator({
     // properties order by first stack
@@ -43,19 +66,22 @@ const RootStack = createStackNavigator({
 }, {
     // Remove the grey header for all screens
     headerMode: 'none'
-})
+});
 
 
-const AppContainer = createAppContainer(RootStack)
+const AppContainer = createAppContainer(RootStack);
 
 
 class App extends Component {
   
   render() {
     return (
-        <AppContainer  />
+        <Provider store={STORE} >
+            <AppContainer  />
+        </Provider>
+        
     )
   }
-}
+};
 
 export default App
