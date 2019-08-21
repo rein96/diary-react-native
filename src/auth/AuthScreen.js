@@ -89,35 +89,14 @@ class AuthScreen extends Component {
                     alert('Password dan Confirm harus sama')
                 }
             }
-        }
-        
-        
+        }   
     }
-
-    // authRegister = async () => {
-    //     let email = this.state.email
-    //     let password = this.state.password
-
-    //     if (password.length < 6) {
-    //         return alert('Password must be at least 6 characters :)')
-    //     }
-
-    //     // REGISTER via Firebase
-    //     let res = await Fire.auth().createUserWithEmailAndPassword(email,password)
-    //     console.log(res.user.email)
-    //     console.log(res.user.uid)
-
-    //     this.props.onLoginUser(res.user.email, res.user.uid)
-
-    //     // Redirect / Navigate to  Main: MainTab
-    //     this.props.navigation.navigate('Main')
-    // }
 
     render() {
         let titleTopButton, form
 
         if(!this.state.login){
-            // RENDER REGISTER
+            // RENDER REGISTER FORM
             titleTopButton = 'Switch to Login'
             titleBotBottom = 'Register'
             form = (
@@ -173,7 +152,7 @@ class AuthScreen extends Component {
                 </Form>
             )
         } else {
-            // RENDER LOGIN
+            // RENDER LOGIN FORM
             titleTopButton = 'Switch to Register'
             titleBotBottom = 'Login'
             form = (

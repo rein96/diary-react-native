@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 class DiaryScreen extends Component {
 
     state = {
-        snapShot: {}    // we want change from {} => []
+        snapShot: {}    // we want change from { first: {}, second: {},  third: {} } = > [ {}, {}, {} ]
     }
 
     onBackButton = () => {

@@ -20,7 +20,7 @@ class DetailDiaryScreen extends Component {
 
     state = {
         // obtained from ListDiary.js -> this.props.navigation.navigate('DetailDiary', { data_diary : this.props.data.item } ) 
-        objDiary: this.props.navigation.getParam('data_diary'),    // diary : { title, diary, date }
+        objDiary: this.props.navigation.getParam('data_diary'),    // objDiary : { title, diary, date }
         edit : false,
         editTitle : this.props.navigation.getParam('data_diary').title,
         editDiary: this.props.navigation.getParam('data_diary').diary
