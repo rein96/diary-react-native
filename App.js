@@ -10,9 +10,9 @@ import EmployeeScreen from './src/appEmployee/EmployeeScreen'
 import AddEmployeeScreen from './src/appEmployee/AddEmployeeScreen'
 import DetailEmployeeScreen from './src/appEmployee/DetailEmployeeScreen'
 
-// import DiaryScreen from './src/app/DiaryScreen'
-// import AddDiaryScreen from './src/app/AddDiaryScreen'
-// import DetailDiaryScreen from './src/app/DetailDiaryScreen'
+import DiaryScreen from './src/app/DiaryScreen'
+import AddDiaryScreen from './src/app/AddDiaryScreen'
+import DetailDiaryScreen from './src/app/DetailDiaryScreen'
 
 import ProfileScreen from './src/app/ProfileScreen'
 
@@ -27,23 +27,23 @@ const EmployeeStack = createStackNavigator(
     {
       ListEmployee: EmployeeScreen,
       AddEmployee: AddEmployeeScreen,
-      DetailEmployee: DetailEmployeeScreen
+      DetailEmployee: DetailEmployeeScreen,
     },
     {
       headerMode: 'none'
     }
 );
 
-// const DiaryStack = createStackNavigator(
-//     {
-//       ListDiary: DiaryScreen,
-//       AddDiary: AddDiaryScreen,
-//       DetailDiary: DetailDiaryScreen
-//     },
-//     {
-//       headerMode: 'none'
-//     }
-// );
+const DiaryStack = createStackNavigator(
+    {
+      ListDiary: DiaryScreen,
+      AddDiary: AddDiaryScreen,
+      DetailDiary: DetailDiaryScreen
+    },
+    {
+      headerMode: 'none'
+    }
+);
 
 // createBottomTabNavigator(RouteConfigs, BottomTabNavigatorConfig);
 const MainTab = createBottomTabNavigator(
@@ -54,6 +54,12 @@ const MainTab = createBottomTabNavigator(
             screen: EmployeeStack,     // 3 stack screen
             navigationOptions: {
                 tabBarIcon: <Icon name='contacts' />   //<ion-icon name="contacts"></ion-icon>
+            }
+        },
+        Diary : {
+            screen: DiaryStack,
+            navigationOptions: {
+                tabBarIcon: <Icon name='bookmarks' />
             }
         },
         Profile: {
